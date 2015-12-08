@@ -1,0 +1,73 @@
+
+body {
+    overflow: hidden;
+    margin: 0px;
+}
+
+/*  div = editor
+    맨 바깥 div */
+#editor {
+    height: 100%;
+    width: 100%;
+}
+
+/*  편집 도구 */
+#tools {
+    height: 5%;
+    width: 100%;
+    position: relative;
+}
+
+/*  슬라이드 table */
+table#panels {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    border-color: gray;
+    border-spacing: 2px;
+
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+td {
+    display: table-cell;
+}
+
+/*  td filmstrip 슬라이드 미리보기 */
+td#filmstrip {
+    width: 219px;
+    vertical-align: top;
+    position: relative;
+    white-space: nowrap;
+}
+
+/*  td filmstrip 안의 svg 를 감싸는 div */
+div.filmstrip {
+    width: 219px;
+    height: 888px;
+    border-right: 1px solid #d9d9d9;
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    vertical-align: top;
+
+}
+
+/*  슬라이드 본문 */
+#canvas-view {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
