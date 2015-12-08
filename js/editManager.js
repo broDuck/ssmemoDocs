@@ -4,14 +4,13 @@
 
 //document.write("<script type='text/javascript' src='asd.js'><"+"/script>");
 
-function editManager()
-{
+function editManager() {
     console.log("create editManager");
 
-    this.svgNS = "http://www.w3.org/2000/svg"
+    this.svgNS = "http://www.w3.org/2000/svg";
 }
 
-editManager.prototype.getSize = function() {
+editManager.prototype.getSize = function () {
     var width = window.innerWidth * 0.114;
     var height = window.innerHeight;
 
@@ -21,7 +20,7 @@ editManager.prototype.getSize = function() {
     document.getElementById("getHeight").innerHTML = "height : " + height;
 }
 
-editManager.prototype.drawFilmstrip = function() {
+editManager.prototype.drawFilmstrip = function () {
 
     var thumbnails = document.createElementNS(this.svgNS, "rect");                   // filmstrip 전체 보여주는 레이아웃
     var cursor = document.createElementNS(this.svgNS, "rect");                       // filmstrip 추가 부분 커서 막대
@@ -109,17 +108,19 @@ editManager.prototype.drawFilmstrip = function() {
     }
 }
 
-editManager.prototype.drawCanvas = function() {
-
+editManager.prototype.drawCanvas = function () {
+    this.drawSVG("pages");
 }
 
-editManager.prototype.drawSVG = function(id) {
+editManager.prototype.drawSVG = function (id) {
     var svg = document.createElement("svg");
-    var testText = document.createElementNS(this.svgNS, "text");
-
+    var testText = document.createElementNS(this.svgNS, "rect");
+    var rect = document.createElementNS(this.svgNS, "rect");
+    var gg = document.createElementNS(this.svgNS, "g");
 
     // svg 설정
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
     svg.setAttribute("version", "1.1");
     svg.setAttribute("fill-rule", "evenodd");
     svg.setAttribute("stroke", "none");
@@ -129,11 +130,27 @@ editManager.prototype.drawSVG = function(id) {
     svg.setAttribute("preserveAspectRatio", "none");
     svg.setAttribute("width", "127px");
     svg.setAttribute("height", "72px");
+    svg.style.lineHeight = "normal";
 
+    // test로 띄워볼 text
     testText.setAttributeNS(null, "x", "10");
     testText.setAttributeNS(null, "y", "10");
-    testText.innerHTML = "hello";
+    testText.setAttributeNS(null, "fill", "red");
+    testText.setAttributeNS(null, "width", "100");
+    testText.setAttributeNS(null, "height", "100");
 
-    svg.appendChild(testText);
+    // rect 설정
+    rect.setAttributeNS(null, "fill", "rgb(5, 5, 5)");
+    rect.setAttributeNS(null, "fill-opacity", "0");
+    rect.setAttributeNS(null, "width", "100%");
+    rect.setAttributeNS(null, "height", "100%");
+
+    gg.setAttributeNS(null, "transform", "translate(0 0) scale(1)");
+
+    gg.appendChild(testText);
+
+    svg.appendChild(rect);
+    svg.appendChild(gg);
+
     document.getElementById(id).appendChild(svg);
 }
