@@ -2,9 +2,13 @@
  * Created by duck on 15. 12. 3.
  */
 
+//document.write("<script type='text/javascript' src='asd.js'><"+"/script>");
+
 function editManager()
 {
     console.log("create editManager");
+
+    this.svgNS = "http://www.w3.org/2000/svg"
 }
 
 editManager.prototype.getSize = function() {
@@ -19,9 +23,8 @@ editManager.prototype.getSize = function() {
 
 editManager.prototype.drawFilmstrip = function() {
 
-    var svgNS = "http://www.w3.org/2000/svg";
-    var thumbnails = document.createElementNS(svgNS, "rect");                   // filmstrip 전체 보여주는 레이아웃
-    var cursor = document.createElementNS(svgNS, "rect");                       // filmstrip 추가 부분 커서 막대
+    var thumbnails = document.createElementNS(this.svgNS, "rect");                   // filmstrip 전체 보여주는 레이아웃
+    var cursor = document.createElementNS(this.svgNS, "rect");                       // filmstrip 추가 부분 커서 막대
     var init = 3;
     var addHeight = 89;
     var pageNumber = 1;
@@ -46,11 +49,12 @@ editManager.prototype.drawFilmstrip = function() {
 
     for (var i = 0; i < 30; i++) {
 
-        var gThumbnail = document.createElementNS(svgNS, "g");                      // thumbnail 그룹
-        var gThumbnailRect = document.createElementNS(svgNS, "rect");               // 그룹 안의 rect
-        var gThumbnailBorder = document.createElementNS(svgNS, "rect");             // 그룹 border
-        var gThumbnailBorderInner = document.createElementNS(svgNS, "rect");        // 그룹 border-inner
-        var gThumbnailPageNumber = document.createElementNS(svgNS, "text");         // 그룹 page number
+        var gThumbnail = document.createElementNS(this.svgNS, "g");                      // thumbnail 그룹
+        var gThumbnailRect = document.createElementNS(this.svgNS, "rect");               // 그룹 안의 rect
+        var gThumbnailBorder = document.createElementNS(this.svgNS, "rect");             // 그룹 border
+        var gThumbnailBorderInner = document.createElementNS(this.svgNS, "rect");        // 그룹 border-inner
+        var gThumbnailPageNumber = document.createElementNS(this.svgNS, "text");         // 그룹 page number
+        var gSmallCanvas = document.createElementNS(this.svgNS, "g");
 
         // thumbnail 그룹
         gThumbnail.setAttributeNS(null, "class", "filmstrip-thumbnail");
@@ -89,13 +93,47 @@ editManager.prototype.drawFilmstrip = function() {
         gThumbnailPageNumber.innerHTML = pageNumber;
         pageNumber++;
 
+        // canvas 미리보기 설정
+        gSmallCanvas.setAttributeNS(null, "id", "page-" + (pageNumber - 1));
+        gSmallCanvas.setAttributeNS(null, "transform", "translate(59 6)");
+
         // 통합 붙이기
         gThumbnail.appendChild(gThumbnailRect);
         gThumbnail.appendChild(gThumbnailBorder);
         gThumbnail.appendChild(gThumbnailBorderInner);
         gThumbnail.appendChild(gThumbnailPageNumber);
+        gThumbnail.appendChild(gSmallCanvas);
 
         document.getElementById("filmstrip-thumbnails").appendChild(gThumbnail);
         document.getElementById("filmstrip-thumbnails").style.height = init + "px";
     }
+}
+
+editManager.prototype.drawCanvas = function() {
+
+}
+
+editManager.prototype.drawSVG = function(id) {
+    var svg = document.createElement("svg");
+    var testText = document.createElementNS(this.svgNS, "text");
+
+
+    // svg 설정
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg.setAttribute("version", "1.1");
+    svg.setAttribute("fill-rule", "evenodd");
+    svg.setAttribute("stroke", "none");
+    svg.setAttribute("stroke-linecap", "square");
+    svg.setAttribute("stroke-miterlimit", "10");
+    svg.setAttribute("overflow", "hidden");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("width", "127px");
+    svg.setAttribute("height", "72px");
+
+    testText.setAttributeNS(null, "x", "10");
+    testText.setAttributeNS(null, "y", "10");
+    testText.innerHTML = "hello";
+
+    svg.appendChild(testText);
+    document.getElementById(id).appendChild(svg);
 }
