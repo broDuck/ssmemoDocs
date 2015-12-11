@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Scripts -->
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <script src='../lib/jquery-1.10.2.js'></script>
+    <script src='../lib/jquery-1.11.3.js'></script>
+    <script src='../lib/jquery-2.1.1.js'></script>
+    <script src='../lib/wysiwyg_image.js'></script>
+    <script src='../lib/jquery.form.js'></script>
+    <script src='../lib/jquery.form.min.js'></script>
+    <script src='../lib/jquery.unobtrusive-ajax.js'></script>
+    <script src='../lib/jquery.unobtrusive-ajax.min.js'></script>
+    <script src='../lib/jquery.validate.js'></script>
+    <script src='../lib/jquery.validate.min.js'></script>
+    <script src='../lib/jquery.validate.unobtrusive.js'></script>
+    <script src='../lib/jquery.validate.unobtrusive.min.js'></script>
+    <script src='../lib/jquery.validate-vsdoc.js'></script>
+    <script src='../lib/jquery-ui.js'></script>
+    <script src='../lib/jquery-ui.unobtrusive-2.2.0.js'></script>
+    <script src='../lib/jquery-ui.unobtrusive-2.2.0.min.js'></script>
+    <script src='../lib/jquery-ui-1.10.0.js'></script>
+    <script src='../lib/jquery-ui-1.10.0.min.js'></script>
+    <script src='../lib/farbtastic.js'></script>
+
+    <!-- Custom JS -->
+    <script src="../js/editManager.js"></script>
+
+    <!-- CSS -->
+    <link href="../css/ssmemodocs.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="editor-container">
+    <div id="tools">
+        <p>제목이 들어갈 부분 </p>
+
+        <p>각종 툴들 들어갈 부분</p>
+    </div>
+    <table id="panels">
+        <tbody>
+        <tr>
+            <td class="filmstrip">
+                <div id="filmstrip">
+
+                </div>
+            </td>
+            <td id="canvas-view" style="background-color: #d9d9d9">
+                <div id="editor-wrapper" style="position: relative;">
+                    <div id="editor" style="background-color: #ffffff">
+                        <p id="getWidth">수정하는 부분</p>
+
+                        <!-- 여기에 page + pageNum 이 들어간다 -->
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--script 실행 부분-->
+<script>
+    var manager = new editManager();
+    manager.initEditorSize();
+    manager.drawTest();
+
+    window.onresize = function () {
+        manager.setEditorSize();
+    }
+</script>
+
+</body>
+</html>
