@@ -51,9 +51,7 @@
             <td id="canvas-view" style="background-color: #d9d9d9">
                 <div id="editor-wrapper" style="position: relative;">
                     <div id="editor" style="background-color: #ffffff">
-                        <p id="getWidth">수정하는 부분</p>
 
-                        <!-- 여기에 page + pageNum 이 들어간다 -->
                     </div>
                 </div>
 
@@ -66,8 +64,7 @@
 <!--script 실행 부분-->
 <script>
     var manager = new editManager();
-    manager.initEditorSize();
-    manager.drawTest();
+    manager.initMethod();
 
     window.onresize = function () {
         manager.setEditorSize();
