@@ -1,5 +1,5 @@
 
-body {
+html, body {
     overflow: hidden;
     margin: 0px;
 }
@@ -7,17 +7,30 @@ body {
 /*  div = editor
     맨 바깥 div */
 #editor-container {
+    margin: 0px;
     height: 100%;
     width: 100%;
 }
 
 /*  편집 도구 */
 #tools {
-    height: 5%;
+    height: 110px;
     width: 100%;
     position: relative;
     border-bottom: 1px solid #d9d9d9;;
 }
+
+#name {
+    margin-left: 1%;
+    margin-bottom: 0px;
+    height: 60px;
+}
+
+#tool {
+    margin-left: 1%;
+    height: 40px;
+}
+
 
 /*  슬라이드 table */
 table#panels {
@@ -85,4 +98,8 @@ td#canvas-view {
 
 .click {
     background-color: rgb(150, 150, 150);
+}
+
+.tool-icon {
+    max-height: 30px;
 }

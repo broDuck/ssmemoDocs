@@ -5,21 +5,20 @@
 function editManager() {
     console.log("create editManager");
 
-    this.totalPage;
+    this.totalPage = 0;
     this.visiblePage;
 }
 
 editManager.prototype.initMethod = function() {
     this.initEditorSize();
-    this.drawTest();
-    //this.changePage(1);
+
 }
 
 editManager.prototype.initEditorSize = function() {
 
     // 미리보기 부분 setting
-    var toolsHeight = $("#tools").height() * 1.2;
-    var filmstripWidth = window.innerWidth * 0.114;
+    var toolsHeight = $("#tools").height();
+    var filmstripWidth = window.innerWidth * 0.12;
     var filmstripHeight = window.innerHeight - toolsHeight;
 
     $(".filmstrip").css("width", filmstripWidth + "px");
@@ -36,7 +35,7 @@ editManager.prototype.initEditorSize = function() {
 
 editManager.prototype.setEditorSize = function() {
 
-    var toolsHeight = $("#tools").height() * 0.9;
+    var toolsHeight = $("#tools").height();
     var filmstripHeight = window.innerHeight - toolsHeight;
 
     $(".filmstrip").css("height", filmstripHeight + "px");
@@ -88,12 +87,13 @@ editManager.prototype.setThumbnails = function(pageNum) {
 
     pageNumber.setAttribute("id", "page-" + pageNum);
     pageNumber.innerHTML = pageNum;
-    pageNumber.style.width = (thumbnailWidth * 0.1) + "px";
+    pageNumber.style.width = (thumbnailWidth * 0.15) + "px";
     pageNumber.style.float = "left";
+    pageNumber.style.textAlign = "right";
     thumbnailContainer.appendChild(pageNumber);
 
     thumbnail.setAttribute("id", "thumbnail-" + pageNum);
-    thumbnail.style.width = (thumbnailWidth * 0.9) + "px";
+    thumbnail.style.width = (thumbnailWidth * 0.85) + "px";
     thumbnail.style.float = "right";
 
     view.setAttribute("id", "view-" + pageNum);
@@ -111,19 +111,8 @@ editManager.prototype.setThumbnails = function(pageNum) {
     this.totalPage = pageNum;
 }
 
-editManager.prototype.drawTest = function() {
-
-    for (var pageNum = 1; pageNum <= 20; pageNum++) {
-        this.setThumbnails(pageNum);
-    }
-
-    for (var pageNum = 1; pageNum <= 20; pageNum++) {
-        this.setCanvas(pageNum);
-        this.addContent(pageNum);
-    }
-}
-
 editManager.prototype.changePage = function(hide, vis) {
+    if (hide == null) hide = 1;
     document.getElementById("canvas-" + hide).style.visibility = "hidden";
     document.getElementById("canvas-" + vis).style.visibility = "visible";
 }
@@ -146,5 +135,11 @@ editManager.prototype.addContent = function() {
 
     document.getElementById("canvas-" + this.visiblePage).appendChild(test);
     document.getElementById("view-" + this.visiblePage).appendChild(test2);
+}
 
+editManager.prototype.addSlide = function() {
+    this.totalPage++;
+
+    this.setThumbnails(this.totalPage);
+    this.setCanvas(this.totalPage);
 }
