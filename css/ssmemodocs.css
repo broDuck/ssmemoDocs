@@ -78,3 +78,11 @@ td#canvas-view {
     overflow: hidden;
     border: 1px solid #000000;
 }
+
+.mouse-in {
+    background-color: #d9d9d9;
+}
+
+.click {
+    background-color: rgb(150, 150, 150);
+}

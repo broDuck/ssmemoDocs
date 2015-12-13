@@ -12,7 +12,7 @@ function editManager() {
 editManager.prototype.initMethod = function() {
     this.initEditorSize();
     this.drawTest();
-    this.changePage(1);
+    //this.changePage(1);
 }
 
 editManager.prototype.initEditorSize = function() {
@@ -81,7 +81,7 @@ editManager.prototype.setThumbnails = function(pageNum) {
     var thumbnail = document.createElement("div");
     var view = document.createElement("div");
 
-    thumbnailContainer.setAttribute("id", "thumbnail-container-" + pageNum);
+    thumbnailContainer.setAttribute("class", "thumbnail-container");
     thumbnailContainer.style.width = thumbnailWidth + "px";
     thumbnailContainer.style.height = thumbnailHeight + "px";
 
@@ -123,14 +123,9 @@ editManager.prototype.drawTest = function() {
     }
 }
 
-editManager.prototype.changePage = function(pageNum) {
-    document.getElementById("thumbnail-container-" + pageNum).style.backgroundColor = "rgb(111,111,111)";
-    document.getElementById("thumbnail-container-" + this.visiblePage).style.backgroundColor = "rgb(255,255,255)";
-
-    document.getElementById("canvas-" + pageNum).style.visibility = "visible";
-    document.getElementById("canvas-" + this.visiblePage).style.visibility = "hidden";
-
-    this.visiblePage = pageNum;
+editManager.prototype.changePage = function(hide, vis) {
+    document.getElementById("canvas-" + hide).style.visibility = "hidden";
+    document.getElementById("canvas-" + vis).style.visibility = "visible";
 }
 
 editManager.prototype.removeContent = function(index) {
@@ -141,7 +136,7 @@ editManager.prototype.removeContent = function(index) {
     big.removeChild(index);
 }
 
-editManager.prototype.addContent = function(index) {
+editManager.prototype.addContent = function() {
     var test = document.createElement("p");
     test.innerHTML = this.visiblePage + " 추가";
 

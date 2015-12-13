@@ -63,12 +63,36 @@
 
 <!--script 실행 부분-->
 <script>
-    var manager = new editManager();
-    manager.initMethod();
 
-    window.onresize = function () {
-        manager.setEditorSize();
-    }
+
+    $(document).ready(function() {
+        var manager = new editManager();
+        manager.initMethod();
+
+        $(window).resize(function() {
+            manager.setEditorSize();
+        });
+
+        // mouse event 등록
+        $(".thumbnail-container").hover(function() {
+            $(this).addClass("mouse-in");
+        }, function() {
+            $(this).removeClass("mouse-in");
+        }).on("click", function() {
+            var hide = $(".click").children(0).html();
+            if (hide == null)   hide = 1;
+            $("div.click").removeClass("click");
+
+            $(this).addClass("click");
+            var vis = $(".click").children(0).html();
+            manager.changePage(hide, vis);
+        });
+
+    });
+
+
+
+
 </script>
 
 </body>
