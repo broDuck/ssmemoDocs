@@ -65,6 +65,7 @@ editManager.prototype.setCanvas = function(pageNum) {
 
     $("#editor").append(canvas);
 
+
     this.visiblePage = pageNum;
 }
 
@@ -114,7 +115,9 @@ editManager.prototype.setThumbnails = function(pageNum) {
 editManager.prototype.changePage = function(hide, vis) {
     if (hide == null) hide = 1;
     document.getElementById("canvas-" + hide).style.visibility = "hidden";
+    document.getElementById("canvas-" + hide).classList.remove('show');
     document.getElementById("canvas-" + vis).style.visibility = "visible";
+    document.getElementById("canvas-" + vis).classList.add('show');
 }
 
 editManager.prototype.removeContent = function(index) {
